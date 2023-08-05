@@ -10,12 +10,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.google.android.gms.common.SignInButton
+import net.rynkbit.overachiever.R
 
 @Composable
-fun LoginView() {
+fun Login() {
     Row(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
@@ -34,7 +37,7 @@ fun LoginView() {
 @Composable
 private fun WelcomeText() {
     Text(
-        text = "Welcome to Overachiver",
+        text = stringResource(R.string.welcome_to_overachiver),
         modifier = Modifier.padding(bottom = 16.dp)
     )
 }
@@ -42,7 +45,9 @@ private fun WelcomeText() {
 @Composable
 private fun GoogleSignInButton() {
     AndroidView(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .testTag(SignInButton::class.simpleName!!),
         factory = { context ->
             SignInButton(context).apply {
                 setSize(SignInButton.SIZE_WIDE)
